@@ -1,0 +1,28 @@
+{
+  "name": "foodorderingapp",
+  "version": "1.0.0",
+  "description": "this an demo food ordering app made with React.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AxelBlaze007/FoodOrderingApp.git"
+  },
+  "author": "Pannalal Mahto",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AxelBlaze007/FoodOrderingApp/issues"
+  },
+  "homepage": "https://github.com/AxelBlaze007/FoodOrderingApp#readme",
+  "dependencies": {
+    "foodorderingapp": "file:",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "parcel": "^2.14.4"
+  }
+}
