@@ -44,7 +44,7 @@ const Header = () => {
   );
 };
 
-const RestaurantCard = () => {
+const RestaurantCard = (props) => {
   return (
     <div className="res-card">
       <img
@@ -52,10 +52,10 @@ const RestaurantCard = () => {
         src="https://b.zmtcdn.com/data/pictures/3/20245863/6b3ec527ef9ff0be082502997c274191.jpg?fit=around|771.75:416.25&crop=771.75:416.25;*,*"
       />
 
-      <h3>OutHouse Cafe</h3>
-      <h4>Biryani,Dibdih,Ranchi</h4>
-      <h4>4.4 stars</h4>
-      <h4>20 minutes</h4>
+      <h3>{props.restaurantName}</h3>
+      <h4>{props.cuisine}</h4>
+      <h4>{props.ratings} stars</h4>
+      <h4>{props.ETA}</h4>
     </div>
   );
 };
@@ -65,13 +65,19 @@ const Body = () => {
     <div className="body">
       <div className="search">Search</div>
       <div className="res-container">
-        <RestaurantCard />
-        <RestaurantCard />
-        <RestaurantCard />
-        <RestaurantCard />
-        <RestaurantCard />
-        <RestaurantCard />
-        <RestaurantCard />
+        <RestaurantCard
+          restaurantName="Outhouse Cafe"
+          cuisine="Biryani,Dibdih,Ranchi"
+          ratings="4.4 "
+          ETA="20 minutes"
+        />
+        <RestaurantCard 
+          restaurantName = "The Kav's"
+          cuisine = "Veg thali"
+          ratings = "4.6 "
+          ETA = "45 minutes"
+        
+        />
       </div>
     </div>
   );
