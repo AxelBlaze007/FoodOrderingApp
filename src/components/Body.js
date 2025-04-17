@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const [fetchRestaurants, setFetchRestaurants] = useState([]);
 
   useEffect(() => {
     fetchData();
@@ -16,17 +17,21 @@ const Body = () => {
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=23.3440997&lng=85.309562&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
-    console.log(json);
-    // optional chaining
+
     setListOfRestaurants(
       json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
+    console.log(json);
+    // optional chaining
+    setFetchRestaurants(
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
   };
-  if (listOfRestaurants.length === 0) {
-    return <Shimmer />;
-  }
+  // if (listOfRestaurants.length === 0) {
+  //   return <Shimmer />;
+  // }
 
-  return listOfRestaurants.length === 0 ? (
+  return fetchRestaurants.length === 0 ? (
     <Shimmer />
   ) : (
     <div className="body">
@@ -42,9 +47,12 @@ const Body = () => {
             onClick={() => {
               //filter restro card and Update the UI
               //searchText
-              const filteredRestaurants = listOfRestaurants.filter((res) =>
+              
+              
+              const filteredRestaurants = fetchRestaurants.filter((res) =>
                 res.info.name.toLowerCase()?.includes(searchText.toLowerCase())
-              );
+              )
+
               setListOfRestaurants(filteredRestaurants);
             }}
           >
