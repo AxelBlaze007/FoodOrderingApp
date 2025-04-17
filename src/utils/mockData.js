@@ -1,5 +1,4 @@
-
- const resObj = [
+export const resObj = [
   {
     "@type": "type.googleapis.com/swiggy.presentation.food.v2.Restaurant",
     info: {
@@ -86,7 +85,7 @@
       areaName: "Lalpur",
       costForTwo: "₹450 for two",
       cuisines: ["Burgers", "Fast Food", "Rolls & Wraps"],
-      avgRating: 4.3,
+      avgRating: 3.5,
       parentId: "547",
       avgRatingString: "4.3",
       totalRatingsString: "10K+",
@@ -685,4 +684,3 @@
     widgetId: "collectionV5RestaurantListWidget_SimRestoRelevance_food_seo",
   },
 ];
-export default resObj;

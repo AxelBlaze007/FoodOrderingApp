@@ -30,3 +30,10 @@ contact
     -when exporting single
 # Named based Export 
     - when exporting more than one component 
+
+
+# React Hooks
+ - useState()
+ - useEffect()
+
+        -useState() ==> it is  a superpowerful hero 
