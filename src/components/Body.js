@@ -2,6 +2,7 @@ import RestaurantCard from "./RestaurantCard";
 import { resObj } from "../utils/mockData";
 import Shimmer from "./Shimmer";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
@@ -15,11 +16,13 @@ const Body = () => {
   const fetchData = async () => {
     const swiggyURL =
       "https://www.swiggy.com/dapi/restaurants/list/v5?" +
-      "lat=23.3440997&lng=85.309562&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"; 
+      "lat=23.3440997&lng=85.309562&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING";
     // const data = await fetch(
     //   "https://www.swiggy.com/dapi/restaurants/list/v5?lat=23.3440997&lng=85.309562&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    const data = await fetch("https://api.codetabs.com/v1/proxy?quest=" + encodeURIComponent(swiggyURL));
-      
+    const data = await fetch(
+      "https://api.codetabs.com/v1/proxy?quest=" + encodeURIComponent(swiggyURL)
+    );
+
     // );
     const json = await data.json();
 
@@ -78,7 +81,12 @@ const Body = () => {
       </div>
       <div className="res-container">
         {listOfRestaurants.map((restaurant) => (
-          <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+          <Link
+            key={restaurant.info.id}
+            to={"/restaurant/" + restaurant.info.id}
+          >
+            <RestaurantCard resData={restaurant} />
+          </Link>
         ))}
       </div>
     </div>
