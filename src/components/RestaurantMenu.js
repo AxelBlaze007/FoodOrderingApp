@@ -1,25 +1,12 @@
-import { useEffect, useState } from "react";
+import useRestraurantMenu from "../utils/useRestraurantMenu.js";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router";
 
 const RestaurantMenu = () => {
-  const [resInfo, setResInfo] = useState(null);
-
   const { resId } = useParams();
-  const fetchMenu = async () => {
-    const swiggyURL = `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=23.3440997&lng=85.309562&restaurantId=${resId}`;
-    const data = await fetch(
-      "https://api.codetabs.com/v1/proxy?quest=" + encodeURIComponent(swiggyURL)
-    );
-    const json = await data.json();
-    console.log(json);
-    setResInfo(json.data);
-  };
-  console.log(resInfo);
 
-  useEffect(() => {
-    fetchMenu();
-  }, []);
+  const resInfo = useRestraurantMenu(resId);
+  console.log(resInfo);
 
   if (resInfo === null) {
     return <Shimmer />;

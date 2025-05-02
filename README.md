@@ -26,14 +26,22 @@ contact
 
 \*/
 
-# default based Export 
-    -when exporting single
-# Named based Export 
-    - when exporting more than one component 
+# default based Export
 
+    -when exporting single
+
+# Named based Export
+
+    - when exporting more than one component
 
 # React Hooks
- - useState()
- - useEffect()
 
-        -useState() ==> it is  a superpowerful hero 
+- useState()
+- useEffect()
+
+       -useState() ==> it is  a superpowerful hero
+
+# Router-dom
+
+-useParams
+it reads url Id
