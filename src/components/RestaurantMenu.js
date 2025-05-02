@@ -1,8 +1,11 @@
+import { useState } from "react";
 import useRestraurantMenu from "../utils/useRestraurantMenu.js";
+import RestaurantCategory from "./RestaurantCategory.js";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router";
 
 const RestaurantMenu = () => {
+  const [showIndex, setShowIndex] = useState(null);
   const { resId } = useParams();
 
   const resInfo = useRestraurantMenu(resId);
@@ -18,24 +21,43 @@ const RestaurantMenu = () => {
           ?.card
       : resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
           ?.card;
+  console.log(
+    "hello",
+    resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards
+  );
+
+  const categories =
+    resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+      (c) =>
+        c.card?.card?.["@type"] ===
+        "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+    );
+  // console.log("cate", categories);
+
   const { name, avgRating, cuisines } = resInfo?.cards[2]?.card?.card?.info;
   const { itemCards } = itemMenuSource || {};
+  const toggleAccordian = (index) => {
+    return setShowIndex(index === showIndex ? null : index);
+  };
 
   return (
     <div>
-      <div className="restaurant-list">
-        <h1>{name}</h1>
-        <h2>{cuisines.join(", ")}</h2>
-        <h2>Menu</h2>
-        <ul>
-          {itemCards.map((item) => (
-            <li key={item.card.info.id}>
-              {item.card.info.name} {"-Rs."}
-              {item.card.info.price / 100 || item.card.info.defaultPrice / 100}
-            </li>
-          ))}
-        </ul>
-        <h4>4.3</h4>
+      <div className="restaurant-list text-center">
+        <h1 className="font-bold text-6xl my-10">{name}</h1>
+        <h2 className="font-bold text-lg ">{cuisines.join(", ")}</h2>
+        {/* Accordian css */}
+        {categories.map((category, index) => {
+          console.log("cat", category);
+
+          return (
+            <RestaurantCategory
+              key={category.card.card.categoryId}
+              data={category?.card?.card}
+              showItems={index === showIndex}
+              setShowIndex={() => toggleAccordian(index)}
+            />
+          );
+        })}
       </div>
     </div>
   );

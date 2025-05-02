@@ -1,13 +1,16 @@
 import RestaurantCard from "./RestaurantCard";
 import { resObj } from "../utils/mockData";
 import Shimmer from "./Shimmer";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [fetchRestaurants, setFetchRestaurants] = useState([]);
+
+  console.log("list", listOfRestaurants);
 
   useEffect(() => {
     fetchData();
@@ -40,11 +43,13 @@ const Body = () => {
   //   return <Shimmer />;
   // }
 
+  const { loggedInUser, setUserName } = useContext(UserContext);
+
   return fetchRestaurants.length === 0 ? (
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="filter ml-28">
+      <div className="filter ml-28 flex">
         <div className="search">
           <input
             type="text"
@@ -69,7 +74,7 @@ const Body = () => {
           </button>
         </div>
         <button
-          className="filter-btn bg-violet-400 mt-5 p-5 rounded-sm"
+          className="filter-btn bg-violet-400 px-2 rounded-sm"
           onClick={() => {
             const filterList = listOfRestaurants.filter(
               (res) => res.info.avgRating > 4
@@ -79,6 +84,14 @@ const Body = () => {
         >
           Top Rated restaurant
         </button>
+        <div className="mx-4">
+          <label>UserName :</label>
+          <input
+            className="px-3 mx-1 border-1"
+            value={loggedInUser}
+            onChange={(e) => setUserName(e.target.value)}
+          />
+        </div>
       </div>
       <div className="res-container flex flex-wrap justify-center">
         {listOfRestaurants.map((restaurant) => (

@@ -1,10 +1,15 @@
 import { LOGO_URL } from "../utils/constants";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import UserContext from "../utils/UserContext";
 
 const Header = () => {
   let login = "LogIn";
-  console.log("header reloader");
+
+  // const [userName, setUserName] = useState(UserContext.name);
+
+  const data = useContext(UserContext);
+  console.log("conte", data.name);
 
   const [btnNameReact, setBtnNameReact] = useState(login);
   return (
@@ -39,6 +44,7 @@ const Header = () => {
           >
             {btnNameReact}
           </button>
+          <li className="px-4 font-bold ">{data.loggedInUser}</li>
         </ul>
       </div>
     </div>
